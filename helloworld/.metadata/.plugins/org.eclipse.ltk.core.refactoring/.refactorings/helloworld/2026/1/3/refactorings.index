@@ -1,0 +1,6 @@
+1768405329231	Rename type 'Register'
+1768405382927	Rename type 'RegisterController'
+1768405409115	Rename type 'AuthorRepository'
+1768405543590	Rename local variable 'register_name'
+1768405562520	Rename method 'addAuthors'
+1768451327101	Rename type 'Login'
