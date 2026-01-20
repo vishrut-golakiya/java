@@ -42,8 +42,8 @@ public class CategoryController {
 		return categoryRepo.findAll();
 	}
 
-	@GetMapping(path = "/list/{c}")
-	public @ResponseBody Category getProductById(@PathVariable int productId) {
-		return categoryRepo.findById(Long.valueOf(productId)).orElse(null);
+	@GetMapping(path = "/list/{categoryId}")
+	public @ResponseBody Category getCategoryById(@PathVariable int categoryId) {
+		return categoryRepo.findById(Long.valueOf(categoryId)).orElse(null);
 	}
 }

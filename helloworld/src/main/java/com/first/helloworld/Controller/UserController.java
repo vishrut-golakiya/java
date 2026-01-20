@@ -89,11 +89,7 @@ public class UserController {
 
 	}
 
-	@GetMapping(path = "/search")
-	public @ResponseBody List<User> searchByUsername(@RequestParam String username) {
-		return userRepo.findByUsernameContainingIgnoreCase(username);
 
-	}
 
 	@DeleteMapping(path = "/delete")
 	public @ResponseBody String DeleteByUserId(@RequestParam int userId) {

@@ -4,15 +4,20 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.first.helloworld.Entitys.AdminRepo;
+import com.first.helloworld.Entitys.Category;
+import com.first.helloworld.Entitys.CategoryRepo;
 import com.first.helloworld.Entitys.Product;
 import com.first.helloworld.Entitys.ProductRepo;
+import com.first.helloworld.Entitys.User;
 import com.first.helloworld.Entitys.Admin;
 
 @Controller
@@ -23,6 +28,9 @@ public class AdminController {
 
 	@Autowired
 	private ProductRepo productRepo;
+	
+	@Autowired
+	private CategoryRepo categoryRepo;
 
 	@PostMapping(path = "/register")
 //	public @ResponseBody String addAdmin(@RequestParam String user_name, @RequestParam String password) {
@@ -92,10 +100,11 @@ public class AdminController {
 		product.setId(a.getId());
 		product.setName(a.getName());
 		product.setDescription(a.getDescription());
-		product.setStock(a.getStock());
+		
 		product.setPrice(a.getPrice());
 		product.setQuantity(a.getQuantity());
 		product.setActive(a.isActive());
+		product.setCategoryId(a.getCategoryId());
 		productRepo.save(product);
 		return "product added successfully";
 	}
@@ -110,5 +119,30 @@ public class AdminController {
 		return productRepo.findById(Long.valueOf(productId)).orElse(null);
 	}
 	
+	
+	@DeleteMapping(path = "/delete")
+	public @ResponseBody String DeleteByUserId(@RequestParam int productId) {
+		Product local = productRepo.findById(Long.valueOf(productId)).orElse(null);
+		if (local != null) {
+			productRepo.delete(local);
+			return "delete successfully";
+		} else
+			return "delete unsuccessfully";
+	}
+	
+	
+	@GetMapping(path = "product/search/{name}")
+	public @ResponseBody List<Product> searchByProductname(@RequestParam String name) {
+		return productRepo.findBynameContainingIgnoreCase(name);
 
+	}
+	
+//	@GetMapping(path = "product/searchbycategory/{name}")
+//	public @ResponseBody List<Product> searchByCategoryname(@RequestParam String name) {
+//		Category category = categoryRepo.findByName(name);
+//		return productRepo.findByCategoryId(Long.valueOf(category.getId()));
+//
+//	}
+	
+	
 }

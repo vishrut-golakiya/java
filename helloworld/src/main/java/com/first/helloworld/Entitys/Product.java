@@ -1,6 +1,7 @@
 package com.first.helloworld.Entitys;
 
 import jakarta.persistence.Entity;
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
@@ -13,27 +14,28 @@ public class Product {
 	private Long id;
 
 	private String name;
+	@Column(nullable = true)
+	private int category_id;
 
 	private String description;
 
 	private double price;
 	
-	private double stock;
 
 	private int quantity;
-
+	
 	private boolean active;
 
 	public Product() {
 	}
 
-	public Product(String name, String description, double price, int quantity, boolean active, double stock) {
+	public Product(String name, String description, double price, int quantity, boolean active) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
 		this.active = active;
-		this.stock= stock;
+		
 				}
 
 	public Long getId() {
@@ -43,7 +45,13 @@ public class Product {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public int getCategoryId() {
+		return category_id;
+	}
 
+	public void setCategoryId(int id) {
+		this.category_id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -62,13 +70,6 @@ public class Product {
 
 	public double getPrice() {
 		return price;
-	}
-
-	public double getStock() {
-		return stock;
-	}
-	public void setStock(double stock) {
-		this.stock = stock;
 	}
 
 	public void setPrice(double price) {
