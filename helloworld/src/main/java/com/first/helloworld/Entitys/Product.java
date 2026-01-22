@@ -14,8 +14,8 @@ public class Product {
 	private Long id;
 
 	private String name;
-	@Column(nullable = true)
-	private int category_id;
+
+	private Long categoryId;
 
 	private String description;
 
@@ -29,13 +29,13 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String name, String description, double price, int quantity, boolean active) {
+	public Product(String name, String description, double price, int quantity, boolean active, Long categoryId) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
 		this.active = active;
-		
+		this.categoryId= categoryId;
 				}
 
 	public Long getId() {
@@ -45,12 +45,12 @@ public class Product {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getCategoryId() {
-		return category_id;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategoryId(int id) {
-		this.category_id = id;
+	public void setCategoryId(Long id) {
+		this.categoryId = id;
 	}
 	public String getName() {
 		return name;

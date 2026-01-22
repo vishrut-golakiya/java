@@ -131,18 +131,18 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping(path = "product/search/{name}")
+	@GetMapping(path = "product/search")
 	public @ResponseBody List<Product> searchByProductname(@RequestParam String name) {
 		return productRepo.findBynameContainingIgnoreCase(name);
 
 	}
 	
-//	@GetMapping(path = "product/searchbycategory/{name}")
-//	public @ResponseBody List<Product> searchByCategoryname(@RequestParam String name) {
-//		Category category = categoryRepo.findByName(name);
-//		return productRepo.findByCategoryId(Long.valueOf(category.getId()));
-//
-//	}
+	@GetMapping(path = "product/searchbycategory")
+	public @ResponseBody List<Product> searchByCategoryname(@RequestParam String name) {
+		Category category = categoryRepo.findByName(name);
+		return productRepo.findByCategoryId(Long.valueOf(category.getId()));
+
+	}
 	
 	
 }
