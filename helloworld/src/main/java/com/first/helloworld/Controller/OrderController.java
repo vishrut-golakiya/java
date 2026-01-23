@@ -20,13 +20,13 @@ import com.first.helloworld.Entitys.Order;
 public class OrderController {
 	
 	@Autowired
-	private OrderRepo orderRepo;
+	private OrderRepo orderRepo;   
 	
 	@GetMapping(path = "/getall")
 	public @ResponseBody List<Order> getAllOrder() {
 		return orderRepo.findAll();
 	}
-	@PutMapping(path = "/update/{orderId}")
+	@PutMapping(path = "/updatestatus/{orderId}")
 	public @ResponseBody String updateOrderStatus(@PathVariable int orderId, @RequestBody Order order) {
 		Order local = orderRepo.findById(Long.valueOf(orderId)).orElse(null);
 		if (local != null) {
@@ -37,5 +37,19 @@ public class OrderController {
 		} else
 			return "update unsuccessfully";
 
+	}
+	@GetMapping(path = "/pending")
+	public @ResponseBody List<Order> getPendingOrders() {
+		return orderRepo.findByOrderStatus("pending");	
+	}
+	
+	@GetMapping(path = "/shipped")
+	public @ResponseBody List<Order> getShippedOrders() {
+		return orderRepo.findByOrderStatus("shipped");	
+	}
+	
+	@GetMapping(path = "/delivered")
+	public @ResponseBody List<Order> getDeliveredOrders() {
+		return orderRepo.findByOrderStatus("delivered");	
 	}
 }

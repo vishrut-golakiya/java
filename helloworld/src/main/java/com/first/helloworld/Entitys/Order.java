@@ -9,13 +9,13 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderId;
 
     private Long userId;  
 
     private double totalAmount;
 
-    private boolean orderStatus;
+    private String orderStatus;
 
     private boolean paymentStatus;
 
@@ -24,11 +24,11 @@ public class Order {
   
 
     public Long getId() {
-        return id;
+        return orderId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.orderId = id;
     }
 
     public Long getUserId() {
@@ -47,11 +47,11 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 
-    public boolean isOrderStatus() {
+    public String isOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(boolean orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
