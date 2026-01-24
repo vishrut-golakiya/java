@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.first.helloworld.Entitys.OrderRepo;
 import com.first.helloworld.Entitys.User;
+import com.first.helloworld.Entitys.Admin;
 import com.first.helloworld.Entitys.Order;
 
 @Controller
@@ -21,6 +23,21 @@ public class OrderController {
 	
 	@Autowired
 	private OrderRepo orderRepo;   
+	
+	@PostMapping(path = "/add")
+	public @ResponseBody String adOrder(@RequestBody Order a) {
+
+		Order order = new Order();
+
+		order.setCreatedAt(a.getCreatedAt());
+		order.setUserId(a.getUserId());
+		order.setOrderStatus(a.isOrderStatus());
+		order.setPaymentStatus(a.isPaymentStatus());
+		order.setTotalAmount(a.getTotalAmount());
+		orderRepo.save(order);
+		return "Details got Saved";
+
+	}
 	
 	@GetMapping(path = "/getall")
 	public @ResponseBody List<Order> getAllOrder() {
@@ -38,6 +55,7 @@ public class OrderController {
 			return "update unsuccessfully";
 
 	}
+	
 	@GetMapping(path = "/pending")
 	public @ResponseBody List<Order> getPendingOrders() {
 		return orderRepo.findByOrderStatus("pending");	
