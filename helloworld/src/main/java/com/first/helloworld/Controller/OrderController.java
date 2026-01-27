@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.first.helloworld.Entitys.OrderRepo;
@@ -18,13 +20,13 @@ import com.first.helloworld.Entitys.Admin;
 import com.first.helloworld.Entitys.Order;
 
 @Controller
-@RequestMapping(path = "/admin/orders")
+@RequestMapping(path = "/admin")
 public class OrderController {
-	
+
 	@Autowired
-	private OrderRepo orderRepo;   
-	
-	@PostMapping(path = "/add")
+	private OrderRepo orderRepo;
+
+	@PostMapping(path = "/orders")
 	public @ResponseBody String adOrder(@RequestBody Order a) {
 
 		Order order = new Order();
@@ -38,36 +40,45 @@ public class OrderController {
 		return "Details got Saved";
 
 	}
-	
-	@GetMapping(path = "/getall")
+
+	@GetMapping(path = "/orders")
 	public @ResponseBody List<Order> getAllOrder() {
 		return orderRepo.findAll();
 	}
-	@PutMapping(path = "/updatestatus/{orderId}")
-	public @ResponseBody String updateOrderStatus(@PathVariable int orderId, @RequestBody Order order) {
+
+	@PutMapping(path = "/orders/status/{orderId}")
+	public @ResponseBody String updateOrderStatus(@PathVariable int orderId, @RequestParam String status) {
 		Order local = orderRepo.findById(Long.valueOf(orderId)).orElse(null);
 		if (local != null) {
 
-			local.setOrderStatus(order.isOrderStatus());
+			local.setOrderStatus(status);
 			orderRepo.save(local);
 			return "update successfully";
 		} else
 			return "update unsuccessfully";
 
 	}
-	
-	@GetMapping(path = "/pending")
+
+	@GetMapping(path = "/orders/pending")
 	public @ResponseBody List<Order> getPendingOrders() {
-		return orderRepo.findByOrderStatus("pending");	
+		return orderRepo.findByOrderStatus("pending");
 	}
-	
-	@GetMapping(path = "/shipped")
+
+	@GetMapping(path = "/orders/shipped")
 	public @ResponseBody List<Order> getShippedOrders() {
-		return orderRepo.findByOrderStatus("shipped");	
+		return orderRepo.findByOrderStatus("shipped");
+	}
+
+	@GetMapping(path = "/orders/delivered")
+	public @ResponseBody List<Order> getDeliveredOrders() {
+		return orderRepo.findByOrderStatus("delivered");
 	}
 	
-	@GetMapping(path = "/delivered")
-	public @ResponseBody List<Order> getDeliveredOrders() {
-		return orderRepo.findByOrderStatus("delivered");	
+	@DeleteMapping(path="/orders/cancle/{orderId}")
+	public @ResponseBody String cancleOrder(@PathVariable Long orderId) {
+		
+		Order order= orderRepo.findById(Long.valueOf(orderId)).orElse(null);
+		orderRepo.delete(order);
+		return "";
 	}
 }

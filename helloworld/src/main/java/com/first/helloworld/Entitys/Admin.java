@@ -13,11 +13,14 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long adminId;
 	private String adminName;
+	private String email;
 	private String password;
 	
-	public Admin(String username, String password) {
+	public Admin(String username, String password, String email) {
 		this.adminName=username;
 		this.password= password;
+		this.email=email;
+		
 	}
 	public Admin() {
 	}
@@ -36,6 +39,14 @@ public class Admin {
 
 	public void setUsername(String username) {
 		this.adminName = username;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

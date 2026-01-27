@@ -22,14 +22,14 @@ import com.first.helloworld.Entitys.CategoryRepo;
 import com.first.helloworld.Entitys.User;
 
 @Controller
-@RequestMapping(path = "/admin/category")
+@RequestMapping(path = "/admin")
 public class CategoryController {
 	
 	@Autowired
 	private CategoryRepo categoryRepo;
 	
 		
-	@PostMapping(path = "/add")
+	@PostMapping(path = "/categories")
 	public @ResponseBody String addProduct(@RequestBody Category a) {
 		Category category = new Category();
 
@@ -42,17 +42,17 @@ public class CategoryController {
 		return "category added successfully";
 	}
 
-	@GetMapping(path = "/list")
+	@GetMapping(path = "/categories")
 	public @ResponseBody List<Category> getAllCategory() {
 		return categoryRepo.findAll();
 	}
 
-	@GetMapping(path = "/list/{categoryId}")
+	@GetMapping(path = "/categories/{categoryId}")
 	public @ResponseBody Category getCategoryById(@PathVariable int categoryId) {
 		return categoryRepo.findById(Long.valueOf(categoryId)).orElse(null);
 	}
 	
-	@PutMapping(path ="/update/{categoryId}")
+	@PutMapping(path ="/categories/{categoryId}")
 	public @ResponseBody String updateCategory(@PathVariable Long categoryId,@RequestBody Category a) {
 		Category category = categoryRepo.findById(Long.valueOf(categoryId)).orElse(null);
 		category.setName(a.getName());
@@ -63,7 +63,7 @@ public class CategoryController {
 		return "category updated successfully";
 	}
 	
-	@DeleteMapping(path = "/delete/{categoryId}")
+	@DeleteMapping(path = "/categories/{categoryId}")
 	public @ResponseBody String deleteCategory(@PathVariable Long categoryId) {
 		Category category = categoryRepo.findById(Long.valueOf(categoryId)).orElse(null);
 		if (category != null) {
