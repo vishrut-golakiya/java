@@ -1,7 +1,11 @@
 package com.first.helloworld.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +22,7 @@ public class ReviewController {
 	@Autowired
 	ReviewRepo reviewRepo;
 
-	@PostMapping(path = "/categories")
+	@PostMapping(path = "/review")
 	public @ResponseBody String addProduct(@RequestBody Review a) {
 		Review review = new Review();
 
@@ -31,5 +35,16 @@ public class ReviewController {
 		reviewRepo.save(review);
 		return "review added successfully";
 	}
-
+	
+	@GetMapping(path = "/review")
+	public @ResponseBody List<Review> ReviewAll() {
+		return reviewRepo.findAll();
+	}
+	
+	@GetMapping(path="/review/{rating}")
+	public @ResponseBody List<Review> GetReviewByRating(@PathVariable int rating) {
+		return reviewRepo.findByRating(rating);
+	}
+	
+	
 }
