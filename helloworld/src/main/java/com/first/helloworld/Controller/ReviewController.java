@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.first.helloworld.Entitys.Category;
 import com.first.helloworld.Entitys.Review;
-import com.first.helloworld.Entitys.ReviewRepo;
+import com.first.helloworld.repo.ReviewRepo;
 
 @Controller
 @RequestMapping(path = "/admin")

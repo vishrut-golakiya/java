@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.first.helloworld.Entitys.OrderRepo;
 import com.first.helloworld.Entitys.User;
+import com.first.helloworld.repo.OrderRepo;
 import com.first.helloworld.Entitys.Admin;
 import com.first.helloworld.Entitys.Order;
 

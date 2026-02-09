@@ -1,7 +1,7 @@
 package com.first.helloworld.Entitys;
 
 import jakarta.persistence.Entity;
-import io.micrometer.common.lang.Nullable;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 

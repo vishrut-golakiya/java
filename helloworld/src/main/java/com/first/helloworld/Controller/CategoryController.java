@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.first.helloworld.Entitys.Category;
-import com.first.helloworld.Entitys.CategoryRepo;
 import com.first.helloworld.Entitys.User;
+import com.first.helloworld.repo.CategoryRepo;
 
 @Controller
 @RequestMapping(path = "/admin")

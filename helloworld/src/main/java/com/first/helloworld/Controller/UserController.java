@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.first.helloworld.Entitys.User;
-import com.first.helloworld.Entitys.UserRepo;
+import com.first.helloworld.repo.UserRepo;
 
 import jakarta.servlet.http.HttpSession;
 

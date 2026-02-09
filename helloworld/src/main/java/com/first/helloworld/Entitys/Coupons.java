@@ -1,13 +1,23 @@
 package com.first.helloworld.Entitys;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "coupons")
 public class Coupons {
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long Couponid;
 	private String code;
 	private String discountType;
 	private double discountValue;
 	private String expiryDate;
 	private boolean isActive;
-	
+		
 
 	public Coupons(String code, String discountType, double discountValue,String expiryDate, boolean isActive) {
 		this.code=code;

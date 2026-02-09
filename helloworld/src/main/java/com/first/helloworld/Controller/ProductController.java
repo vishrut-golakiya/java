@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.first.helloworld.Entitys.Category;
-import com.first.helloworld.Entitys.CategoryRepo;
 import com.first.helloworld.Entitys.Product;
-import com.first.helloworld.Entitys.ProductRepo;
+import com.first.helloworld.repo.CategoryRepo;
+import com.first.helloworld.repo.ProductRepo;
 
 @Controller
 @RequestMapping(path = "/admin")
